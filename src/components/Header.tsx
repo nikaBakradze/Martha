@@ -4,8 +4,8 @@ export function Header() {
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="martha home">
-        <Star size={12} fill="currentColor" strokeWidth={1} aria-hidden="true" />
-        <span>martha</span>
+        <Star size={25} fill="currentColor" strokeWidth={1} aria-hidden="true" />
+        <span>Martha</span>
       </a>
       <nav aria-label="Main navigation">
         <a href="#first-year">My First Year</a>
