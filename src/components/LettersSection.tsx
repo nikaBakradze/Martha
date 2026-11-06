@@ -9,6 +9,7 @@ import {
   updateLetter,
 } from '../lib/letters'
 import type { Letter } from '../types/letter'
+import { revealVariants, scaleRevealVariants, staggerContainerVariants } from '../lib/motion'
 
 const emptyForm = { name: '', message: '' }
 
@@ -170,10 +171,10 @@ export function LettersSection() {
     <section className="letters-section section-shell" id="letters" aria-labelledby="letters-title">
       <motion.div
         className="letters-panel"
-        initial={{ opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        variants={revealVariants}
       >
         <div className="section-icon"><Heart size={22} fill="currentColor" strokeWidth={1} aria-hidden="true" /></div>
         <p className="eyebrow dark-eyebrow">A keepsake for later</p>
@@ -229,23 +230,30 @@ export function LettersSection() {
             <span>Be the first to leave a little love.</span>
           </div>
         ) : (
-          <div className="letters-list">
+          <motion.div
+            className="letters-list"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.15 }}
+            variants={staggerContainerVariants}
+          >
             {letters.map((letter) => (
               <motion.button
                 className="letter-card"
                 key={letter.id}
                 type="button"
                 onClick={() => setReadingLetter(letter)}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.2 }}
+                variants={scaleRevealVariants}
                 whileHover={{ y: -3 }}
               >
                 <span className="letter-card-mark" aria-hidden="true">“</span>
                 <strong className="letter-author">{letter.name}</strong>
               </motion.button>
             ))}
-          </div>
+          </motion.div>
         )}
       </motion.div>
       <AnimatePresence>

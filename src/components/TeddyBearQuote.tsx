@@ -1,15 +1,16 @@
 import { Heart, Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
 import bearPhoto from '../assets/bear-photo.png'
+import { revealVariants } from '../lib/motion'
 
 export function TeddyBearQuote() {
   return (
     <motion.aside
       className="teddy-quote"
-      initial={{ opacity: 0, x: 18 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.8 }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.35 }}
+      variants={revealVariants}
     >
       <div className="quote-decoration quote-star"><Sparkles size={15} strokeWidth={1.1} /></div>
       <div className="teddy-scene" aria-label="Teddy bear illustration">

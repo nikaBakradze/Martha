@@ -1,4 +1,4 @@
-import { MotionConfig, motion } from 'motion/react'
+import { MotionConfig, motion, useReducedMotion } from 'motion/react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { FirstYearSection } from './components/FirstYearSection'
@@ -8,6 +8,8 @@ import { Footer } from './components/Footer'
 import './App.css'
 
 function App() {
+  const shouldReduceMotion = useReducedMotion()
+
   return (
     <MotionConfig reducedMotion="user">
       <main className="birthday-page">
@@ -22,7 +24,7 @@ function App() {
         <motion.div
           className="floating-heart"
           aria-hidden="true"
-          animate={{ y: [0, -8, 0], rotate: [-4, 3, -4] }}
+          animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], rotate: [-4, 3, -4] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
         >
           ♡

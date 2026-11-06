@@ -1,7 +1,9 @@
 import { ArrowDown, Sparkles } from 'lucide-react'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
+import { softRevealVariants } from '../lib/motion'
 
 export function Hero() {
+  const shouldReduceMotion = useReducedMotion()
 
 const scrollToGreeting = () => {
   const target = document.getElementById('first-year')
@@ -28,9 +30,10 @@ const scrollToGreeting = () => {
       <div className="hero-content">
         <motion.div
           className="eyebrow"
-          initial={{ opacity: 0, y: 12 }}
+          initial="hidden"
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
+          variants={softRevealVariants}
+          transition={{ duration: 0.72, delay: shouldReduceMotion ? 0 : 0.12 }}
         >
           <Sparkles size={14} strokeWidth={1.3} aria-hidden="true" />
           <span>A little fairytale</span>
@@ -38,9 +41,10 @@ const scrollToGreeting = () => {
 
         <motion.h1
           id="page-title"
-          initial={{ opacity: 0, y: 18 }}
+          initial="hidden"
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.28 }}
+          variants={softRevealVariants}
+          transition={{ duration: 0.9, delay: shouldReduceMotion ? 0 : 0.25 }}
         >
           My First
           <em>Birthday</em>
@@ -48,9 +52,10 @@ const scrollToGreeting = () => {
 
         <motion.p
           className="hero-subtitle"
-          initial={{ opacity: 0, y: 14 }}
+          initial="hidden"
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
+          variants={softRevealVariants}
+          transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.44 }}
         >
           One tiny year, one big love, and a little world made brighter by you.
         </motion.p>
@@ -59,11 +64,12 @@ const scrollToGreeting = () => {
           className="primary-button"
           type="button"
           onClick={scrollToGreeting}
-          whileHover={{ y: -2 }}
+          whileHover={shouldReduceMotion ? undefined : { y: -2, scale: 1.015 }}
           whileTap={{ scale: 0.98 }}
-          initial={{ opacity: 0, y: 12 }}
+          initial="hidden"
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.62 }}
+          variants={softRevealVariants}
+          transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.62 }}
         >
           Open my fairytale
           <ArrowDown size={16} strokeWidth={1.5} aria-hidden="true" />
